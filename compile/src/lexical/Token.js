@@ -3,7 +3,7 @@
  * @version:v1.1.0
  */
 import TokenTypes from "./TokenTypes";
-import {isCode} from "./chartHelp";
+import {isCode, isNumber, isOneToNine} from "./chartHelp";
 import LexicalException from "./LexicalException";
 const keywordSet = new Set([
     'if','else','do','while','for','let',
@@ -257,5 +257,83 @@ export default class Token {
         throw new LexicalException('unexpected error');
     }
     //number
-    static makeNumber(it){}
+    static makeNumber(it){
+        let s = "";
+        let state = 0;
+
+        while (it.hasNext()){
+            let ch = it.peek();
+            switch (state) {
+                case 0:
+                    if(ch==="0"){
+                        state=1;
+                    }else if(isOneToNine(ch)){
+                        state=2;
+                    }else if(ch==="+"||ch==="-"){
+                        state=3;
+                    }else if(ch==="."){
+                        //.
+                        state=5;
+                    }
+                    break;
+                case 1:
+                    if(ch==="0"){
+                        state=1;
+                    }else if(ch=="."){
+                        state=4;
+                    }else if(isOneToNine(ch)){
+                        state = 2;
+                    }else{
+                        return new Token(TokenTypes.INT,s);
+                    }
+                    break;
+                case 2:
+                    if(isNumber(ch)){
+                        state=2;
+                    }else if(ch==="."){
+                        state=4;
+                    }else{
+                        return new Token(TokenTypes.INT,s);
+                    }
+                    break;
+                case 3:
+                    if(isNumber(ch)){
+                        state=2;
+                    }else if(ch==="."){
+                        state=5;
+                    }else{
+                        throw LexicalException.fromChar(ch);
+                    }
+                    break;
+                case 4:
+                    if(ch==="."){
+                        throw LexicalException.fromChar(ch);
+                    }else if(isNumber(ch)){
+                        state=20;
+                    }else{
+                        return new Token(TokenTypes.FLOAT,s);
+                    }
+                    break;
+                case 5:
+                    if(isNumber(ch)){
+                        state=20;
+                    }else{
+                        throw LexicalException.fromChar(ch);
+                    }
+                    break;
+                case 20:
+                    if(isNumber(ch)){
+                        state=20;
+                    }else if(ch==="."){
+                        throw LexicalException.fromChar(ch);
+                    }else{
+                        return new Token(TokenTypes.FLOAT,s);
+                    }
+                    break;
+            }
+            s+=ch;
+            it.next();
+        }
+        throw new LexicalException('unexpected error');
+    }
 }

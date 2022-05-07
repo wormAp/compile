@@ -55,4 +55,22 @@ describe('token_test',()=>{
             asserToken(token,expected,TokenTypes.OPERATOR)
         })
     });
+    it('makeNumber_test ', function () {
+        const test = [
+            "+0 aa",
+            "-0 da",
+            '.4 qwqwq',
+            '.9876 ahda',
+            '976.321 ddda',
+            '-21 ujg',
+            '-156.7862121*6661'
+        ]
+        test.forEach((item)=>{
+            const it = new Iterator(arrayToGenerator([...item]))
+            const token = Token.makeNumber(it);
+            const [expected] = item.split(/[ *]/);
+            const type = item.indexOf('.')==-1?TokenTypes.INT:TokenTypes.FLOAT;
+            asserToken(token,expected,type)
+        });
+    });
 });
