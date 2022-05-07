@@ -10,6 +10,7 @@ export default class Iterator {
         this._queueCache = new LinkList();
         this._stackCache = new LinkList();
         this._endToken = endToken;
+
     }
     //是否有next
     hasNext(){
@@ -40,9 +41,9 @@ export default class Iterator {
         }else{
             val = this._it.next().value;
             if(val === undefined){
-                let temp = this._endToken;
+                val = this._endToken;
                 this._endToken = null;
-                return  temp;
+                // return  temp;
             }
         }
         while (this._queueCache.getSize()>this._cacheSize-1){

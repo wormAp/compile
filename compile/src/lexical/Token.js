@@ -260,7 +260,6 @@ export default class Token {
     static makeNumber(it){
         let s = "";
         let state = 0;
-
         while (it.hasNext()){
             let ch = it.peek();
             switch (state) {
@@ -334,6 +333,7 @@ export default class Token {
             s+=ch;
             it.next();
         }
+
         throw new LexicalException('unexpected error');
     }
 }
