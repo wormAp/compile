@@ -22,6 +22,27 @@ export default class Lexical {
             if(ch == ' ' || ch == '\n'){
                 continue;
             }
+            if(ch=="/"){
+                debugger
+                if(lookHead=="/"){
+                    while (it.hasNext() && (ch=it.next() != '\n'));
+                }else if(lookHead == "*"){
+                    let vaild = false;
+                    while (it.hasNext()){
+                        const p = it.next();
+                        if(p=="*" && it.peek() == "/"){
+                            vaild=true;
+                            it.next();
+                            break;
+                        }
+                    }
+                    if(!vaild){
+                        throw new LexicalException('co,,emt not matched');
+                    }
+                }
+                continue;
+
+            }
             if(ch=="{"||ch=="}" || ch == "(" || ch==")"){
                 tokens.push(new Token(TokenTypes.BRACKET,ch));
                 continue;
@@ -56,7 +77,6 @@ export default class Lexical {
                 tokens.push(Token.makeOperator(it));
                 continue;
             }
-
             throw LexicalException.fromChar(ch);
 
         }
