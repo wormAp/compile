@@ -23,7 +23,6 @@ export default class Lexical {
                 continue;
             }
             if(ch=="/"){
-                debugger
                 if(lookHead=="/"){
                     while (it.hasNext() && (ch=it.next() != '\n'));
                 }else if(lookHead == "*"){
