@@ -5,7 +5,7 @@
 const chartReg = /^[a-z|A-Z]$/;
 const numberReg = /^[0-9]$/;
 const codeReg = /^[_|a-z|A-Z|0-9]$/;
-const operatorReg = /^[+|\-|*|\/|\%|\=|\&|^|\||^|,|;]$/
+const operatorReg = /^[+|\-|*|\/|\%|\=|\&|^|\||^|,|;|!]$/
 const oneToNine= /^[1-9]$/;
 export function isChart(cha) {
     return chartReg.test(cha);

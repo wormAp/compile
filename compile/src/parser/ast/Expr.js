@@ -39,6 +39,7 @@ export default class Expr extends ASTNode{
                 ()=>Expr.E_(parent,it,k)
                 )
         }else{
+
             //E(t)->F E_(t)|u E_(t)
             return Expr.race(it,
                 ()=>Expr.combine(parent,it,
@@ -70,9 +71,10 @@ export default class Expr extends ASTNode{
         const token = it.peek();
         if(token.isVariable()){
             return new Variable(parent,it);
-        }else{
+        }else if (token.isScalar()){
             return new Scalar(parent,it);
         }
+        return null
     }
     static U(parent,it){
         const token = it.peek();

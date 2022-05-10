@@ -29,4 +29,16 @@ describe('simpleParse_test',()=>{
     it('1*2+3_test', function () {
         expect(toPostFixExpression(createExpr("1*2+3"))).to.be.equal("1 2 * 3 +");
     });
+
+    it('1*(2+4)_test', function () {
+        expect(toPostFixExpression(createExpr("1*(2+4)"))).to.be.equal("1 2 4 + *");
+    });
+
+    it('(1*2!=7)==3!=4*5+6_test', function () {
+        expect(toPostFixExpression(createExpr("(1*2!=7)==3!=4*5+6"))).to.be.equal("1 2 * 7 != 3 4 5 * 6 + != ==");
+    });
+
+    // it('1*(2+4)_test', function () {
+    //     expect(toPostFixExpression(createExpr("1*(2+4)"))).to.be.equal("1 2 4 + *");
+    // });
 });

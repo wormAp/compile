@@ -7,7 +7,7 @@ import Enum from "../common/Enum";
 const TokenTypes = {
     KEYWORD:new Enum('KEYWORD',1),//关键子 if else function do while for let const var switch case class extends
     VARIABLE:new Enum('VARIABLE',2), //abc
-    OPERATOR:new Enum('OPERATOR',3),//+ - * / ^ & % = +=...
+    OPERATOR:new Enum('OPERATOR',3),//+ - * / ^ & % = += !=....
     BRACKET:new Enum('BRACKET',4),//{} () []
     STRING:new Enum('STRING',5),//"11122" '1122'
     FLOAT:new Enum('FLOAT',6),//0.1 1. 0.4 .4
