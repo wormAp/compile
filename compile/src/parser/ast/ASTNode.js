@@ -10,6 +10,9 @@ export default class ASTNode {
         this._label = label;
         this._lexeme = null;//token
     }
+    getType(){
+        return this._type;
+    }
     getChild(index){
         if(index<0 || index>=this._children.length){
             throw new Error('index 不合法!')
