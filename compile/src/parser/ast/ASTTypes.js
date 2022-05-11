@@ -12,7 +12,8 @@ const ASTTypes = {
     IF_STMT:new Enum('IF_STMT:',6),
     WHILE_STMT:new Enum('WHILE_STMT:',7),
     FOR_STMT:new Enum('FOR_STMT:',8),
-    DECLARE_STMT:new Enum('DECLARE_STMT:',9),//赋值语句
-    FUNCTION_DECLARE_STMT:new Enum('FUNCTION_DECLARE_STMT:',10)
+    DECLARE_STMT:new Enum('DECLARE_STMT:',9),//声明语句
+    ASSIGN_STMT:new Enum('ASSIGN_STMT:',10),//赋值语句
+    FUNCTION_DECLARE_STMT:new Enum('FUNCTION_DECLARE_STMT:',11)
 };
 export default ASTTypes

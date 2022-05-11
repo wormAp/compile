@@ -9,6 +9,8 @@ export function toPostFixExpression(node) {
     let right = "";
     switch (node.getType()) {
         case ASTTypes.BINARY_EXPR:
+        case ASTTypes.DECLARE_STMT:
+        case ASTTypes.ASSIGN_STMT:
             left = toPostFixExpression(node.getChild(0))
             right = toPostFixExpression(node.getChild(1))
             return left+" "+right+" "+node.getLexeme().getValue();
